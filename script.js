@@ -19,3 +19,29 @@ function getData() {
         });
 }
 
+// Agrega un event listener al botón con id 'putButton' para que ejecute la función putData cuando se hace clic
+document.querySelector('#putButton').addEventListener('click', putData);
+
+// Definición de la función putData, que se ejecuta cuando se hace clic en el botón
+function putData() {
+    // Selecciona el elemento <pre> con id 'putResult', que se utilizará para mostrar los resultados o mensajes
+    const resultBox = document.querySelector('#putResult');
+    resultBox.textContent = 'Running PUT request...';
+    
+    // Realiza una solicitud HTTP GET a la URL proporcionada
+    fetch('https://jsonplaceholder.typicode.com/photos/2')
+         // Cuando se recibe una respuesta, esta se convierte a formato JSON
+        .then(response => response.json()) 
+        // Una vez que los datos JSON son obtenidos, se ejecuta este bloque de código
+        .then(data => {
+            resultBox.textContent = JSON.stringify(data, null, 2); 
+            console.log(resultBox); 
+            console.log(data); 
+        })
+         // Si ocurre un error en la solicitud, el error es capturado y se maneja en este bloque
+        .catch(error => {
+            // manejo de errores de la solicitud
+            resultBox.textContent = 'Error fetching data: ' + error; // Mostrar un mensaje de error en resultBox
+        });
+      }
+
