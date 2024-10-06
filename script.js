@@ -3,7 +3,7 @@ document.querySelector('#getButton').addEventListener('click', getData);
 
 function getData() {
     const resultBox = document.querySelector('#getResult'); // selecciona el elemento para mostrar los resultados
-    resultBox.textContent = 'Running GET request...'; // Mensaje inicial mientras se realiza la solicitud
+    resultBox.textContent = 'Enviando solicitud GET...'; // Mensaje inicial mientras se realiza la solicitud
 
     // realiza la solicitud GET a la API para obtener el objeto con ID 2
     fetch('https://jsonplaceholder.typicode.com/photos/2')
@@ -19,6 +19,34 @@ function getData() {
         });
 }
 
+// POST Request
+// Agrega un event listener al botón con id 'postButton' para que ejecute la función putData cuando se hace clic
+document.querySelector('#postButton').addEventListener('click', postData);
+function postData() {
+  const resultBox = document.querySelector('#postResult');
+  resultBox.textContent = 'Enviando solicitud POST...';
+  fetch('https://jsonplaceholder.typicode.com/photos', {
+    method: 'POST', // Llama al metodo POST para realizar la solicitud deseada
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+        albumId: 1,
+        title: "Imagen solicitud POST Binarios",
+        url: "https://aguacatec.es/wp-content/uploads/2023/10/e5a978b8-6772-4c85-a50e-15581af7d483.png"
+    }),
+  })
+    .then(response => response.json())
+    .then(data => {
+      resultBox.textContent = JSON.stringify(data, null, 2); // Muestra el resultado en el HTML en un pre
+      console.log(resultBox);
+      console.log(data);
+    })
+    .catch(error => {
+      resultBox.textContent = 'Error fetching data: ' + error;
+    });
+}
+
 // Agrega un event listener al botón con id 'putButton' para que ejecute la función putData cuando se hace clic
 document.querySelector('#putButton').addEventListener('click', putData);
 
@@ -26,7 +54,7 @@ document.querySelector('#putButton').addEventListener('click', putData);
 function putData() {
     // Selecciona el elemento <pre> con id 'putResult', que se utilizará para mostrar los resultados o mensajes
     const resultBox = document.querySelector('#putResult');
-    resultBox.textContent = 'Running PUT request...';
+    resultBox.textContent = 'Enviando solicitud PUT...';
     
     // Realiza una solicitud HTTP GET a la URL proporcionada
     fetch('https://jsonplaceholder.typicode.com/photos/2')
@@ -51,7 +79,7 @@ document.querySelector('#deleteButton').addEventListener('click', deleteData);
 
 function deleteData() {
     const resultBox = document.querySelector('#deleteResult'); // Selecciona el elemento para mostrar los resultados
-    resultBox.textContent = 'Running DELETE request...'; // Mensaje inicial mientras se realiza la solicitud
+    resultBox.textContent = 'Enviando solicitud DELETE...'; // Mensaje inicial mientras se realiza la solicitud
 
     // Realiza la solicitud DELETE a la API para eliminar el objeto con ID 2
     fetch('https://jsonplaceholder.typicode.com/photos/2', {
