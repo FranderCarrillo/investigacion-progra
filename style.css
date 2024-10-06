@@ -1,0 +1,13 @@
+body{
+    background-color: #222;
+}
+pre {
+    background-color: #f4f4f4;
+    padding: 10px;
+    border-radius: 12px;
+    width: 600px;
+  }
+
+h1{
+    color: white;
+}
