@@ -45,3 +45,26 @@ function putData() {
         });
       }
 
+//DELETE
+// Se asigna el evento de clic al botón para realizar la solicitud DELETE
+document.querySelector('#deleteButton').addEventListener('click', deleteData);
+
+function deleteData() {
+    const resultBox = document.querySelector('#deleteResult'); // Selecciona el elemento para mostrar los resultados
+    resultBox.textContent = 'Running DELETE request...'; // Mensaje inicial mientras se realiza la solicitud
+
+    // Realiza la solicitud DELETE a la API para eliminar el objeto con ID 2
+    fetch('https://jsonplaceholder.typicode.com/photos/2', {
+        method: 'DELETE', // Método DELETE para eliminar el recurso
+    })
+    .then(response => response.json()) // Convertir la respuesta en formato JSON
+    .then(data => {
+        resultBox.textContent = JSON.stringify(data, null, 2); // Mostrar el resultado del DELETE (normalmente vacío) en resultBox
+        console.log(resultBox); // Se muestra el elemento resultBox en la consola
+        console.log(data); // Se muestra el objeto JSON (vacío o con datos) en la consola
+    })
+    .catch(error => {
+        // Manejo de errores de la solicitud
+        resultBox.textContent = 'Error fetching data: ' + error; // Mostrar un mensaje de error en resultBox
+    });
+}
